@@ -55,21 +55,30 @@ Page({
     }
     console.log('===', 'https://api.douban.com/api/v2/book/search?q=' + _this.data.searchKey)
     wx.request({
-      // url: 'https://api.douban.com/api/v2/book/search?q=' + _this.data.searchKey,
-      url: 'https://douban.uieee.com/api/v2/book/search?q=' + _this.data.searchKey,
+      // url: 'https://api.douban.com/v2/book/search?q=' + _this.data.searchKey,
+      url: 'https://douban.uieee.com/v2/book/search?q=' + _this.data.searchKey,
       method: 'GET',
+      header: {
+        'Content-Type': 'application/xml'
+      },
       success(res) {
         wx.hideLoading()
         console.log('getBookList res====', res);
         if (res.statusCode && res.statusCode === 200) {
-          const data = res.data.result
+          const data = res.books
           if (data) {
             data.forEach(item => {
-              item.record_date = date.formatTime(item.record_date).substring(0, 10)
-              var array = wx.base64ToArrayBuffer(item.bookImage);
-              var base64 = wx.arrayBufferToBase64(array);
-              //将转后的信息赋值给image的src 
-              item.image = "data:image/png;base64," + item.bookImage
+              console.log('item==', item)
+              item.title = item.publisher
+              item.press = item.publisher
+              item.author = item.author.join(',')
+              // item.record_date = date.formatTime(item.record_date).substring(0, 10)
+              // var array = wx.base64ToArrayBuffer(item.bookImage);
+              // var base64 = wx.arrayBufferToBase64(array);
+              // //将转后的信息赋值给image的src 
+              // item.image = "data:image/png;base64," + item.bookImage
+              console.log('item==', item)
+
             })
             _this.setData({
               bookList: data,

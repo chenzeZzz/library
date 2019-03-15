@@ -27,7 +27,7 @@
             </view>
             <!-- 列表 -->
             <view wx:if="{{bookList.length !== 0}}">
-                <view wx:for="{{bookList}}" wx:key="index" class="book-item" data-id="{{item.id}}" data-title="{{item.title}}">
+                <view wx:for="{{bookList}}" wx:key="index" class="book-item">
                     <view class="book-img" data-bookId="{{item.id}}" data-collected="{{item.collected}}" bindtap="star">
                         <image mode="aspectFit" src="{{item.image}}"></image>
                     </view>

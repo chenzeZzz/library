@@ -41,11 +41,19 @@ export default {
                     message: '已取消'
                 })
             })
+        },
+        created() {
+            if (Store.get('isLogin') === 1) {
+                this.$router.push('books')
+            } else{
+                this.$router.push('login')
+            }
         }
     },
     mounted() {
+        this.created()
         this.username = Store.get('user').username
-    }
+    },
 }
 </script>
 <style lang="scss" scoped>

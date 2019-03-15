@@ -79,7 +79,7 @@
 
             <el-tab-pane label="录入"
                 name="recording">
-                <div class="header">
+                <!-- <div class="header">
                     <el-input v-model="key"
                         prefix-icon="el-icon-search"
                         autofocus
@@ -88,9 +88,9 @@
                     <el-button type="primary"
                         plain
                         @click="search">搜索</el-button>
-                </div>
+                </div> -->
                 <div class="content">
-                    <el-table :data="recordList"
+                    <!-- <el-table :data="recordList"
                         stripe
                         style="width: 100%"
                         v-loading="loading"
@@ -125,7 +125,59 @@
                                     @click="openDialog(scope.row)">录入</el-button>
                             </template>
                         </el-table-column>
-                    </el-table>
+                    </el-table> -->
+
+                    <el-form :model="currTempl">
+                        <el-form-item label="图书封面" v-model="currTempl.image" :label-width="formLabelWidth">
+                            <el-upload
+                                class="upload-demo"
+                                action="nouse"
+                                :before-upload='beforUpload0'
+                                multiple: false
+                                :limit="1">
+                                <el-button size="small" type="primary">点击上传</el-button>
+                            </el-upload>
+                        </el-form-item>
+                        <el-form-item label="书名" :label-width="formLabelWidth">
+                            <el-input v-model="currTempl.title" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="作者" :label-width="formLabelWidth">
+                            <el-input v-model="currTempl.author" autocomplete="off"></el-input>                        
+                        </el-form-item>
+                        <el-form-item label="类型" prop="type" :label-width="formLabelWidth">
+                            <el-select v-model="currTempl.type"
+                                placeholder="选择类型"
+                                >
+                                <el-option v-for="item in bookStatus"
+                                    :key="item.id"
+                                    :label="item.name"
+                                    :value="item.id">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="编号" :label-width="formLabelWidth">
+                            <el-input v-model="currTempl.code" autocomplete="off"></el-input>                        
+                        </el-form-item>
+                        <el-form-item label="出版社" :label-width="formLabelWidth">
+                            <el-input v-model="currTempl.press" autocomplete="off"></el-input>                        
+                        </el-form-item>
+                        <el-form-item label="简介" :label-width="formLabelWidth">
+                            <el-input type="textarea" v-model="currTempl.desc" autocomplete="off"></el-input>                        
+                        </el-form-item>
+                        <el-form-item label="上传"  :label-width="formLabelWidth">
+                            <el-upload
+                                class="upload-demo"
+                                action="nouse"
+                                :before-upload='beforUpload1'
+                                multiple: false
+                                :limit="1">
+                                <el-button size="small" type="primary">点击上传</el-button>
+                            </el-upload>
+                        </el-form-item>
+                        <el-form-item :label-width="formLabelWidth">
+                            <el-button type="primary" @click="record">录入</el-button>
+                        </el-form-item>
+                    </el-form>
                 </div>
             </el-tab-pane>
             <el-dialog title="书籍信息" :visible.sync="dialogTableVisible">
@@ -159,6 +211,9 @@
                                 :value="item.id">
                             </el-option>
                         </el-select>
+                    </el-form-item>
+                    <el-form-item label="编号" :label-width="formLabelWidth">
+                        <el-input v-model="currTempl.code" autocomplete="off"></el-input>                        
                     </el-form-item>
                      <el-form-item label="出版社" :label-width="formLabelWidth">
                         <el-input v-model="currTempl.press" autocomplete="off"></el-input>                        
@@ -307,7 +362,7 @@ export default {
                     fd.append(key, element)
                 }
             }
-            this.http.post(`${api.Api}/upload`, fd)
+            this.http.post(`${api.bookApi}/upload`, fd)
                 .then(res => {
                     if (res.status === 200) {
                         this.$message.success('录入成功')
@@ -417,15 +472,16 @@ export default {
                     message: '已取消删除'
                 })
             })
-        }
-    },
-    created() {
-        if (Store.get('isLogin') === 0) {
-            this.$router.push('/login')
-        }
+        },
+        created() {
+            if (Store.get('isLogin') === 0) {
+                this.$router.push('/login')
+            }
+        },
     },
     mounted() {
         this.user = Store.get('user')
+        this.created()
         this.getBookData()
         this.getBookType()
     }

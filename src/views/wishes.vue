@@ -1,7 +1,7 @@
 <template>
     <div class="users-container container">
         <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{ path: '/wishes' }">愿望清单</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/wishes' }">愿望排行</el-breadcrumb-item>
         </el-breadcrumb>
         <div class="content">
             <el-table :data="wishesList"
@@ -19,6 +19,9 @@
                 </el-table-column>
                 <el-table-column prop="title"
                     label="书名">
+                </el-table-column>
+                <el-table-column prop="author"
+                    label="作者">
                 </el-table-column>
                 <el-table-column label="被加入愿望单">
                     <template slot-scope="scope">

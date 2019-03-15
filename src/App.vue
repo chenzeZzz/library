@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import Store from 'store2'
 import BookNav from '@/components/navbar'
 import BookSlider from '@/components/slider'
 
@@ -35,6 +36,16 @@ export default {
         isLogin() {
             return new RegExp(this.$route.path).test('/login')
         }
+    },
+    methods: {
+        created() {
+            if (Store.get('isLogin') === 1) {
+                this.$router.push('books')
+            }
+        }
+    },
+    mounted() {
+        this.created()
     }
 }
 </script>

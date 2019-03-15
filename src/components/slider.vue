@@ -7,7 +7,7 @@
             <el-menu-item index="books"
                 class="tc">图书管理</el-menu-item>
             <el-menu-item index="wishes"
-                class="tc">愿望清单</el-menu-item>
+                class="tc">愿望排行</el-menu-item>
         </el-menu>
     </div>
 </template>
