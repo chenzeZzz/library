@@ -43,13 +43,10 @@
                         </view>
                     </view>
 
-                    <view class="book-img" data-bookid="{{item.id}}" data-collected="{{item.collected}}" catchtap="star">
-                        <image wx:if="{{item.collected}}" mode="aspectFit"
+                    <view class="book-img" data-title="{{item.title}}" data-author="{{item.author}}" catchtap="addWish">
+                       <image mode="aspectFit"
                        style="width: 25px;"
-                       src="/images/star.svg"></image>
-                       <image wx:if="{{!item.collected}}" mode="aspectFit"
-                       style="width: 25px;"
-                       src="/images/unstar.svg"></image>
+                       src="/images/add.svg"></image>
                     </view>
                 </view>
             </view>

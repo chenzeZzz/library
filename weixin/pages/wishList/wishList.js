@@ -56,7 +56,7 @@ Page({
     console.log('===', 'https://api.douban.com/api/v2/book/search?q=' + _this.data.searchKey)
     wx.request({
       // url: 'https://api.douban.com/v2/book/search?q=' + _this.data.searchKey,
-      url: 'https://douban.uieee.com/v2/book/search?q=' + _this.data.searchKey,
+      url: 'https://47.99.165.165/v2/book/search?q=' + _this.data.searchKey,
       method: 'GET',
       header: {
         'Content-Type': 'application/xml'
@@ -65,20 +65,13 @@ Page({
         wx.hideLoading()
         console.log('getBookList res====', res);
         if (res.statusCode && res.statusCode === 200) {
-          const data = res.books
+          const data = res.data.books
           if (data) {
             data.forEach(item => {
               console.log('item==', item)
-              item.title = item.publisher
+              item.title = item.title
               item.press = item.publisher
               item.author = item.author.join(',')
-              // item.record_date = date.formatTime(item.record_date).substring(0, 10)
-              // var array = wx.base64ToArrayBuffer(item.bookImage);
-              // var base64 = wx.arrayBufferToBase64(array);
-              // //将转后的信息赋值给image的src 
-              // item.image = "data:image/png;base64," + item.bookImage
-              console.log('item==', item)
-
             })
             _this.setData({
               bookList: data,
@@ -196,20 +189,32 @@ Page({
     })
   },
 
-  addWish() {
+  addWish(data) {
     const _this = this
-    const user = wx.getStorageSync('user')
+    let _bookTitle = ''
+    let _bookAuthor = ''
+    if (data && data.currentTarget && data.currentTarget.dataset) {
+      _bookTitle = data.currentTarget.dataset.title
+      _bookAuthor = data.currentTarget.dataset.author
+    }else{
+      return wx.showToast({
+        title: '该书未开放',
+        icon: 'none',
+        duration: 1000//持续的时间
+      })
+    }
     wx.request({
-      url: 'http://localhost:8888/wish/add',
+      url: 'http://barryli.ink:9999/book/v1/bookWish/add',
       method: 'POST',
       data: {
-        title: _this.data.searchKey,
-        user: user
+        userId: Number(_this.data.user.id),
+        bookTitle: _bookTitle,
+        bookAuthor: _this.data.searchKey,
       },
       success(res) {
         if (res.statusCode && res.statusCode === 200) {
           wx.showToast({
-            title: res.data.msg,
+            title: '添加成功',
             icon: 'success',
             duration: 2000
           })
