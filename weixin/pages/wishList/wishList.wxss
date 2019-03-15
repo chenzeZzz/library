@@ -1,0 +1,112 @@
+/* pages/bookList/bookList.wxss */
+
+.tab {
+    display: flex;
+    padding: 0 40rpx;
+    margin-bottom: 20rpx;
+}
+
+.tab-item {
+    flex: 1;
+    width: 20rpx;
+    font-size: 28rpx;
+    text-align: center;
+    padding: 10rpx 0;
+}
+
+.active {
+    font-weight: bold;
+    border-bottom: 6rpx solid #62c0e2;
+}
+
+.main {
+    height: 100%;
+    padding: 0 40rpx;
+    font-size: 30rpx;
+}
+
+.main .empty-container {
+    padding: 100rpx;
+    text-align: center;
+}
+
+.main .empty-container .add-wish {
+  color: red;
+}
+
+.list .section {
+    display: flex;
+    /* float: left; */
+    margin-bottom: 20rpx;
+    padding: 8rpx 20rpx;
+    font-size: 24rpx;
+}
+
+.search-half-container {
+  text-align: center;
+}
+
+.search-left {
+  float: left;
+  display: flex;
+  margin-bottom: 20rpx;
+  /* margin-right: 10rpx; */
+  padding: 8rpx 20rpx;
+  font-size: 28rpx;
+  border-radius: 20rpx;
+  border: 4rpx solid #62c0e2;
+  width: 40%;
+}
+
+.search-right {
+  float: right;
+  display: flex;
+  margin-bottom: 20rpx;
+  /* margin-right: 10rpx; */
+  padding: 8rpx 20rpx;
+  font-size: 28rpx;
+  border-radius: 20rpx;
+  border: 4rpx solid #62c0e2;
+  width: 40%;
+}
+
+.list .search {
+    display: flex;
+    margin-bottom: 20rpx;
+    padding: 8rpx 20rpx;
+    font-size: 28rpx;
+    border-radius: 20rpx;
+    border: 4rpx solid #62c0e2;
+}
+
+.list .search input {
+    flex: 1;
+    font-size: 26rpx;
+}
+
+.list .search icon {
+    padding: 10rpx;
+}
+
+.book-item .book-info {
+    width: 100%;
+}
+
+.book-item .book-info2 {
+    width: 100%;
+    margin-left: 40%
+}
+
+.book-item .more-btn {
+  
+}
+
+.search-btn {
+  margin: 0 0 20rpx 0;
+  text-align: center;
+}
+
+.search-btn button {
+  width: 80%;
+  background-color: #62c0e2;
+}

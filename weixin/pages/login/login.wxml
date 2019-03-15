@@ -1,0 +1,31 @@
+<!--pages/login/login.wxml-->
+<view class='container'>
+  <view class='bg-img'>
+    <image mode='scaleToFill' src='../../images/login_bg.png'></image>
+  </view>
+  <view class='main'>
+    <view class='title'>
+      <text>在线图书馆</text>
+    </view>
+    <view class='account-input'>
+      <input focus='true' value="{{account.name}}" bindinput='bindAccountInput' placeholder='账号' placeholder-style='color: #fff;' />
+    </view>
+    <view class='pwd-input'>
+      <input value="{{account.pwd}}" bindinput='bindPwdInput' password placeholder='密码' placeholder-style='color: #fff;' />
+    </view>
+    <view class='login-btn'  wx:if="{{mode == 'login'}}">
+      <button type='default' bindtap='login' size='mini'>登陆</button>
+    </view>
+    <!-- <view class='login-btn'  wx:if="{{mode == 'regist'}}">
+      <button type='default' bindtap='regist' size='mini'>注册</button>
+    </view> -->
+  </view>
+  <!-- <view class='tips'>
+    <label wx:if="{{mode == 'regist'}}">提示:如果你已有账号,请直接
+      <label bindtap='switchMode' data-mode="login" style='color: #2ba0e3;'>登录</label>
+    </label>
+    <label wx:if="{{mode == 'login'}}">提示:如果你没有账号,
+      <label bindtap='switchMode' data-mode="regist" style='color: #2ba0e3;'>马上注册</label>
+    </label>
+  </view> -->
+</view>
